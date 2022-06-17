@@ -9,7 +9,7 @@ contract Estudiante
     address private _docente;
     mapping(string => uint) private _notas_materias;
     string[] private materias;
-    uint private _promedio
+    uint private _promedio;
 
     constructor(string memory nombre_, string memory apellido_, string memory curso_)
     {
@@ -49,21 +49,18 @@ contract Estudiante
 
     function aprobo(string memory materia) public view returns(bool)
     {
-        return _notas_materias[materia] >= 6;
+        return _notas_materias[materia] >= 60;
     }
 
     function promedio() public view returns(uint)
     {
         uint promedionotas = 0;
-
-        for (uint i = 0; i < _notas_materias.length; i++)
+        
+        for (uint i = 0; i < materias.length; i++)
         {
-            uint promedionotas = 0;
-            for (uint i = 0; i < materias.length; i++)
-            {
-                promedionotas += _notas_materias[materias[i]];
-            }
-            return (promedionotas / materias.length);
+            promedionotas += _notas_materias[materias[i]];
         }
+        
+        return (promedionotas / materias.length);
     }
 }
